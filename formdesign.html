@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表单设计</title>
+<style type="text/css">
+	.operator_form_design{
+		display:inline-block;
+		clear:both;
+	}
+	.operator_form_design>div{
+		float:left;
+		margin-left:10px;
+		border:1px solid #CCC;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	.operator_form_design>div>span{
+		background-color:#0FF;
+		display:block;
+		float:left;
+		width:70px;
+		text-align:right;
+	}
+	.operator_form_design>div>label{
+		display:block;
+		float:left;
+		width:90px;
+		text-align:center;
+		margin-left:2px;
+		margin-top:1px;
+		margin-bottom:1px;
+		cursor:pointer;
+	}
+	.operator_form_design>div>label:hover{
+		text-decoration:underline;
+	}
+</style>
+</head>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript" src="js/element.js"></script>
+<script type="text/javascript" src="js/colorpanl.js"></script>
+<script type="text/javascript" src="js/formdesign.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(e) {
+        $table.createTable(4,6,"form_tag");
+    });
+	function initWindows(){
+		var width = window.innerWidth-30;
+		var height = window.innerHeight;
+		$(".form_content_design").css({width:width + "px"});
+		$(".operator_form_design").css({width:width + "px"});
+		$("#mask_interfaces_mast").css({width:width + "px",height:height+"px"});
+		$("#border_interface_style").css({width:width + "px",height:height+"px"});
+		$("#border_innter_interface").css({width:width + "px",height:height+"px"});
+	}
+	$(document).ready(function(e) {
+        initWindows();
+    });
+	window.onresize=function(){
+		initWindows();	
+	}
+</script>
+<body>
+<div>
+    <div class="operator_form_design">
+    	<div>
+        	<span>边框:</span>
+            <label>上边框</label>
+            <label>下边框</label>
+            <label>左边框</label>
+            <label>右边框</label>
+            <label>所有边框</label>
+        </div>
+        <div>
+        	<span>对齐:</span>
+            <label>水平居左</label>
+            <label>水平居中</label>
+            <label>水平居右</label>
+            <label>垂直居上</label>
+            <label>垂直居中</label>
+            <label>垂直居下</label>
+        </div>
+        <div>
+        	<span>字迹:</span>
+            <label>字体大小</label>
+            <label>字体颜色</label>
+            <label>字体</label>
+        </div>
+        <div>
+        	<span>表格操作:</span>
+            <label onclick="$table.tableop.insertRow($table.constDa.INSERTROWUP)">上插入行</label>
+            <label onclick="$table.tableop.insertRow($table.constDa.INSERTROWDOWN)">下插入行</label>
+            <label onclick="$table.tableop.insertCol($table.constDa.INSERTCOLLEFT)">左插入列</label>
+            <label onclick="$table.tableop.insertCol($table.constDa.INSERTCOLRIGHT)">右插入列</label>
+            <label onclick="$table.tableop.deleteRow()">删除行</label>
+            <label onclick="$table.tableop.deleteCol()">删除列</label>
+        </div>
+        <div>
+        	<span>元素:</span>
+            <label>添加元素</label>
+            <label>元素属性</label>
+        </div>
+        <div>
+        	<span>单元操作:</span>
+            <label onclick="$table.mergeTable.mergeTd()">合并单元格</label>
+            <label onclick="$table.mergeTable.dispartTd()">拆分单元格</label>
+        </div>
+        <div>
+        	<span>单元属性:</span>
+            <label>背景颜色</label>
+            <label>长度</label>
+            <label>宽度</label>
+        </div>
+    </div>
+</div>
+<div class="form_content_design" style="display:table-cell; vertical-align:middle; text-align:center; background-color:#888; height:520px; clear:both;">
+<form action="" method="post" enctype="multipart/form-data" style="width:800px; display:inline-block; background-color:#FFF; height:500px; overflow:auto; margin-top:10px;">
+	<div id="form_tag" style="display:inline-block; width:100%;">
+    	
+    </div>
+</form>
+</div>
+<div>
+	<input type="button" value="保存" />
+    <input type="button" value="取消" />
+</div>
+
+<!--遮掩部分-->
+<div id="mask_interfaces_mast" style="position:fixed; left:0px; top:0px; background-color:#999; opacity:0.5; z-index:10000; display:none;"></div>
+
+<!--边框-->
+<div id="border_interface_style" style="position:fixed; left:0px; top:0px; z-index:10001; display:none;">
+	<div style="display:table-cell; vertical-align:middle; text-align:center; alignment-adjust:central;" id="border_innter_interface">
+    	<div style="display:inline-block; width:600px; height:400px; background-color:#FFF;">
+        	<div style="margin-top:10px;">
+            
+            </div>
+        	<div>
+            	<label style="text-align:left; float:left; margin-left:5px;">选择边框:</label>
+                <input type="text" id="current_border_selected" disabled="disabled" style="text-align:left; float:left; width:80px;" />
+                <label style="text-align:left; float:left; margin-left:15px;">边框宽度</label>
+                <select style="text-align:left; float:left;">
+                	<option value="1px">1px</option>
+                    <option value="2px">2px</option>
+                    <option value="3px">3px</option>
+                    <option value="4px">4px</option>
+                    <option value="5px">5px</option>
+                    <option value="6px">6px</option>
+                    <option value="7px">7px</option>
+                </select>
+                <label style="text-align:left; float:left; margin-left:15px;">边框样式</label>
+                <select style="text-align:left; float:left; color:">
+                	<option value="">-----------------</option>
+                    <option value="" style="text-decoration:line-through;">__________</option>
+                </select>
+            </div>
+            <div style="clear:both;">
+            	<label style="text-align:left; float:left; margin-left:5px;">边框颜色:</label>
+                <table>
+                	
+                </table>
+                <div style="margin-top:20px;">
+                	<label style="float:left; color:#FFF;">测试数据:</label>
+                	<label style="float:left;">颜色:</label>
+                    <input type="text" value="" style="width:80px;float:left;" /> 
+                    <label style="float:left; margin-left:10px;">R:</label><input type="text" value="" style="width:80px;float:left;" />
+                    <label style="float:left; margin-left:10px;">G:</label><input type="text" value="" style="width:80px;float:left;" />
+                    <label style="float:left; margin-left:10px;">B:</label><input type="text" value="" style="width:80px;float:left;" />
+                </div>
+                <div style="margin-top:10px; width:100%; display:inline-block;">
+                	<input type="button" value="确定" style="float:left; width:45%; height:30px;" />
+                    <input type="button" value="取消" style="float:right; width:45%; height:30px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
